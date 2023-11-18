@@ -56,6 +56,7 @@ def supprimer():
             update()
             break
     if not livre_supprimer:
+        messagebox.showwarning("Erreur", "Le livre n'existe pas")
         print(f"le livre ayant le code  {isbn} n'exite pas ")
     code_isbn_entry.delete(0, 40)
 def rechercher ():
@@ -79,6 +80,7 @@ def rechercher ():
     if resultat_de_recherche:
         print(resultat_de_recherche)
     else:
+        messagebox.showwarning("Erreur", "Aucun livre correspondant")
         print("Aucun résultat")
     rechercher_entry.delete(0,40)
    
@@ -88,7 +90,10 @@ def modification():
     auteur = auteur_entry.get()
     isbn = isbn_entry.get()
     genre = genre_entry.get()
-
+    if biblio.__len__() == 0:
+        messagebox.showwarning("Erreur", "bibliotheque vide")
+        print("bibliotheque vide")
+        return
     for ajout in biblio:
         if isbn == ajout["isbn"]:
             ajout["titre"] = titre
@@ -97,6 +102,9 @@ def modification():
             ajout["genre"] = genre
             with open ("gestio_biblio.json", "w") as f:
                 json.dump(biblio, f, indent=4)
+        else:
+            messagebox.showinfo("Erreur", "Le livre n'existe pas")
+            print("Le livre n'existe pas")
     update()
 
 titre_label = tkinter.Label(fenetre, text="titre")
