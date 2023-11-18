@@ -1,4 +1,4 @@
-Nom gestionnaire de bibliothèque
+gestionnaire de bibliothèque
 
 Description
 
